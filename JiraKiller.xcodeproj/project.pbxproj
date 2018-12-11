@@ -12,6 +12,8 @@
 		879947DC21C063DE00B74DCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 879947DB21C063DE00B74DCC /* Assets.xcassets */; };
 		879947DF21C063DE00B74DCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 879947DD21C063DE00B74DCC /* LaunchScreen.storyboard */; };
 		879947E921C065D700B74DCC /* ProjectsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879947E821C065D700B74DCC /* ProjectsListVC.swift */; };
+		879947F321C06D4500B74DCC /* ProjectsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879947F121C06D4500B74DCC /* ProjectsDataSource.swift */; };
+		879947F921C06F8500B74DCC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879947F821C06F8500B74DCC /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		879947DE21C063DE00B74DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		879947E021C063DE00B74DCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		879947E821C065D700B74DCC /* ProjectsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListVC.swift; sourceTree = "<group>"; };
+		879947F121C06D4500B74DCC /* ProjectsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsDataSource.swift; sourceTree = "<group>"; };
+		879947F821C06F8500B74DCC /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				879947D821C063DA00B74DCC /* Main.storyboard */,
-				879947E721C0656600B74DCC /* Supporting Files */,
 				879947E821C065D700B74DCC /* ProjectsListVC.swift */,
+				879947EF21C06D4500B74DCC /* Services */,
+				879947E721C0656600B74DCC /* Supporting Files */,
 			);
 			path = JiraKiller;
 			sourceTree = "<group>";
@@ -70,6 +75,15 @@
 				879947E021C063DE00B74DCC /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		879947EF21C06D4500B74DCC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				879947F821C06F8500B74DCC /* DataManager.swift */,
+				879947F121C06D4500B74DCC /* ProjectsDataSource.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +157,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				879947F321C06D4500B74DCC /* ProjectsDataSource.swift in Sources */,
+				879947F921C06F8500B74DCC /* DataManager.swift in Sources */,
 				879947E921C065D700B74DCC /* ProjectsListVC.swift in Sources */,
 				879947D521C063DA00B74DCC /* AppDelegate.swift in Sources */,
 			);

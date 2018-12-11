@@ -12,6 +12,10 @@ class ProjectsListVC: UIViewController
 {
     @IBOutlet weak var tableView: UITableView!
     
+    private var projectsList: [Project] {
+        return ProjectsDataSource.shared.getProjects()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,11 +23,31 @@ class ProjectsListVC: UIViewController
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        setupNavigationBar()
     }
-}
-
-extension ProjectsListVC: UITableViewDelegate
-{
+    
+    @objc private func addNewItem(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "Add New Project", message: "", preferredStyle: .alert)
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Project Name"
+        }
+        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { [weak self] _ in
+            if let projectName = alertController.textFields?[0].text {
+                ProjectsDataSource.shared.postProject(project: Project(name: projectName))
+                self?.tableView.reloadData()
+            }
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func setupNavigationBar() {
+        let rightButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewItem(_:)))
+        self.navigationItem.setRightBarButton(rightButtonItem, animated: false)
+    }
 }
 
 extension ProjectsListVC: UITableViewDataSource
@@ -33,12 +57,16 @@ extension ProjectsListVC: UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return projectsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = "Project \(indexPath.row)"
+        cell.textLabel?.text = projectsList[indexPath.row].name
         return cell
     }
+}
+
+extension ProjectsListVC: UITableViewDelegate
+{
 }
