@@ -13,7 +13,10 @@
 		879947DF21C063DE00B74DCC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 879947DD21C063DE00B74DCC /* LaunchScreen.storyboard */; };
 		879947E921C065D700B74DCC /* ProjectsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879947E821C065D700B74DCC /* ProjectsListVC.swift */; };
 		879947F321C06D4500B74DCC /* ProjectsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879947F121C06D4500B74DCC /* ProjectsDataSource.swift */; };
-		879947F921C06F8500B74DCC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879947F821C06F8500B74DCC /* DataManager.swift */; };
+		879947FB21C075C500B74DCC /* TasksListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879947FA21C075C500B74DCC /* TasksListVC.swift */; };
+		8799480621C0774700B74DCC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8799480421C0774700B74DCC /* DataManager.swift */; };
+		8799480721C0774700B74DCC /* TasksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8799480521C0774700B74DCC /* TasksDataSource.swift */; };
+		8799480B21C0792900B74DCC /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8799480A21C0792900B74DCC /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +28,10 @@
 		879947E021C063DE00B74DCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		879947E821C065D700B74DCC /* ProjectsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListVC.swift; sourceTree = "<group>"; };
 		879947F121C06D4500B74DCC /* ProjectsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsDataSource.swift; sourceTree = "<group>"; };
-		879947F821C06F8500B74DCC /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		879947FA21C075C500B74DCC /* TasksListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListVC.swift; sourceTree = "<group>"; };
+		8799480421C0774700B74DCC /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		8799480521C0774700B74DCC /* TasksDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksDataSource.swift; sourceTree = "<group>"; };
+		8799480A21C0792900B74DCC /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,7 @@
 			children = (
 				879947D821C063DA00B74DCC /* Main.storyboard */,
 				879947E821C065D700B74DCC /* ProjectsListVC.swift */,
+				879947FA21C075C500B74DCC /* TasksListVC.swift */,
 				879947EF21C06D4500B74DCC /* Services */,
 				879947E721C0656600B74DCC /* Supporting Files */,
 			);
@@ -80,8 +87,10 @@
 		879947EF21C06D4500B74DCC /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				879947F821C06F8500B74DCC /* DataManager.swift */,
+				8799480421C0774700B74DCC /* DataManager.swift */,
+				8799480521C0774700B74DCC /* TasksDataSource.swift */,
 				879947F121C06D4500B74DCC /* ProjectsDataSource.swift */,
+				8799480A21C0792900B74DCC /* Router.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -158,9 +167,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				879947F321C06D4500B74DCC /* ProjectsDataSource.swift in Sources */,
-				879947F921C06F8500B74DCC /* DataManager.swift in Sources */,
+				8799480621C0774700B74DCC /* DataManager.swift in Sources */,
+				879947FB21C075C500B74DCC /* TasksListVC.swift in Sources */,
+				8799480B21C0792900B74DCC /* Router.swift in Sources */,
 				879947E921C065D700B74DCC /* ProjectsListVC.swift in Sources */,
 				879947D521C063DA00B74DCC /* AppDelegate.swift in Sources */,
+				8799480721C0774700B74DCC /* TasksDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

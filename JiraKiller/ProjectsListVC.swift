@@ -69,4 +69,7 @@ extension ProjectsListVC: UITableViewDataSource
 
 extension ProjectsListVC: UITableViewDelegate
 {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        showTasksList(project: projectsList[indexPath.row])
+    }
 }
