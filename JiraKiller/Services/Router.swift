@@ -17,4 +17,12 @@ extension UIViewController
         tasksListVC.project = project
         self.navigationController?.pushViewController(tasksListVC, animated: true)
     }
+    
+    func showTaskDetails(task: Task?) {
+        guard let detailsVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TaskDetailsVC") as? TaskDetailsVC else {
+            return
+        }
+        detailsVC.task = task
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
 }

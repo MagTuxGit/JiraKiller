@@ -66,6 +66,6 @@ extension TasksListVC: UITableViewDataSource
 extension TasksListVC: UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // show task
+        showTaskDetails(task: tasksList[indexPath.row])
     }
 }

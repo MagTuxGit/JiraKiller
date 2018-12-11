@@ -17,6 +17,7 @@
 		8799480621C0774700B74DCC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8799480421C0774700B74DCC /* DataManager.swift */; };
 		8799480721C0774700B74DCC /* TasksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8799480521C0774700B74DCC /* TasksDataSource.swift */; };
 		8799480B21C0792900B74DCC /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8799480A21C0792900B74DCC /* Router.swift */; };
+		8799480D21C07B2800B74DCC /* TaskDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8799480C21C07B2800B74DCC /* TaskDetailsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		8799480421C0774700B74DCC /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		8799480521C0774700B74DCC /* TasksDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksDataSource.swift; sourceTree = "<group>"; };
 		8799480A21C0792900B74DCC /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		8799480C21C07B2800B74DCC /* TaskDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				879947D821C063DA00B74DCC /* Main.storyboard */,
 				879947E821C065D700B74DCC /* ProjectsListVC.swift */,
 				879947FA21C075C500B74DCC /* TasksListVC.swift */,
+				8799480C21C07B2800B74DCC /* TaskDetailsVC.swift */,
 				879947EF21C06D4500B74DCC /* Services */,
 				879947E721C0656600B74DCC /* Supporting Files */,
 			);
@@ -166,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8799480D21C07B2800B74DCC /* TaskDetailsVC.swift in Sources */,
 				879947F321C06D4500B74DCC /* ProjectsDataSource.swift in Sources */,
 				8799480621C0774700B74DCC /* DataManager.swift in Sources */,
 				879947FB21C075C500B74DCC /* TasksListVC.swift in Sources */,
