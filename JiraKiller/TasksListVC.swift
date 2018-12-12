@@ -26,6 +26,8 @@ class TasksListVC: UIViewController
         tableView.delegate = self
         tableView.dataSource = self
         
+        TasksDataSource.shared.delegate = self
+        
         setupNavigationBar()
     }
     
@@ -43,6 +45,13 @@ class TasksListVC: UIViewController
         
         let rightButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewTask(_:)))
         self.navigationItem.setRightBarButton(rightButtonItem, animated: false)
+    }
+}
+
+extension TasksListVC: TasksDataSourceDelegate
+{
+    func tasksListDidUpdate() {
+        self.tableView.reloadData()
     }
 }
 
