@@ -66,6 +66,10 @@ class DataManager
 
 extension DataManager
 {
+    func getProject(projectId: Int) -> Project? {
+        return projects.first(where: { $0.id == projectId })
+    }
+    
     func getProjects() -> [Project] {
         if projects.isEmpty {
             projects = initialProjects
@@ -84,12 +88,12 @@ extension DataManager
 extension DataManager
 {
     func getTasks(projectId: Int) -> [Task] {
-        return projects.first(where: { $0.id == projectId })?.tasks ?? []
+        return getProject(projectId: projectId)?.tasks ?? []
     }
     
     func postTask(projectId: Int, task: Task) {
-        var tasks = getTasks(projectId: projectId)
-        tasks.append(task)
+        let project = getProject(projectId: projectId)
+        project?.tasks.append(task)
     }
     
     func putTask(task: Task) {
