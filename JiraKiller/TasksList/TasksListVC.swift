@@ -17,7 +17,7 @@ class TasksListVC: UIViewController
     private var tasksList: [Task] {
         return project?.tasks ?? []
     }
-    private var currentTask: Int = 0
+    private var currentTask: Int? = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,8 @@ class TasksListVC: UIViewController
     }
     
     @objc private func addNewTask(_ sender: UIBarButtonItem) {
-        // add new task
+        currentTask = nil
+        showTaskDetails(task: nil)
     }
     
     @objc private func onDismiss(_ sender: UIBarButtonItem) {
@@ -77,13 +78,19 @@ extension TasksListVC: UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentTask = indexPath.row
-        showTaskDetails(task: tasksList[currentTask])
+        showTaskDetails(task: tasksList[indexPath.row])
     }
 }
 
 extension TasksListVC: NameEditorDelegate {
     func nameDidChange(name: String) {
-        tasksList[currentTask].name = name
-        tasksListDidUpdate()
+        if let currentTask = currentTask {
+            let task = tasksList[currentTask]
+            task.name = name
+            TasksDataSource.shared.putTask(task: task)
+        } else {
+            let task = Task(name: name)
+            TasksDataSource.shared.postTask(projectId: project!.id, task: task)
+        }
     }
 }
