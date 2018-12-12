@@ -22,7 +22,8 @@ extension UIViewController
         guard let detailsVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TaskDetailsVC") as? TaskDetailsVC else {
             return
         }
-        detailsVC.task = task
+        detailsVC.name = task?.name ?? ""
+        detailsVC.delegate = self as? NameEditorDelegate
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }

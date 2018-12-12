@@ -8,16 +8,21 @@
 
 import UIKit
 
+protocol NameEditorDelegate: class {
+    func nameDidChange(name: String)
+}
+
 class TaskDetailsVC: UIViewController
 {
     @IBOutlet private weak var taskNameTextField: UITextField!
     
-    var task: Task?
+    weak var delegate: NameEditorDelegate?
+    var name: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        taskNameTextField.text = task?.name
+        taskNameTextField.text = name
         
         setupNavigationBar()
     }
@@ -27,12 +32,9 @@ class TaskDetailsVC: UIViewController
     }
     
     @objc private func onSave(_ button: UIBarButtonItem) {
-        let taskName = taskNameTextField.text ?? ""
+        name = taskNameTextField.text ?? ""
         
-        if let task = task {
-            task.name = taskName
-            TasksDataSource.shared.putTask(task: task)
-        }
+        delegate?.nameDidChange(name: name)
         
         self.navigationController?.popViewController(animated: true)
     }
