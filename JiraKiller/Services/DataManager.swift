@@ -10,28 +10,28 @@ import Foundation
 
 class Project: NSObject, NSCoding
 {
-    static var maxId: Int = 0
-    
-    var id: Int
+    var id: String
     var name: String
     var tasks = [Task]()
     
-    init(id: Int, name: String, tasks: [Task]) {
+    init(id: String, name: String, tasks: [Task]) {
         self.id = id
         self.name = name
         self.tasks = tasks
     }
     
     convenience init(name: String) {
-        self.init(id: Project.maxId, name: name, tasks: [])
-        Project.maxId += 1
+        let id = UUID().uuidString
+        self.init(id: id, name: name, tasks: [])
     }
     
     // NSCoding
-    required convenience init(coder aDecoder: NSCoder) {
-        let id = aDecoder.decodeInteger(forKey: "id")
-        let name = aDecoder.decodeObject(forKey: "name") as! String
-        let tasks = aDecoder.decodeObject(forKey: "tasks") as! [Task]
+    required convenience init?(coder aDecoder: NSCoder) {
+        guard let id = aDecoder.decodeObject(forKey: "id") as? String,
+        let name = aDecoder.decodeObject(forKey: "name") as? String,
+        let tasks = aDecoder.decodeObject(forKey: "tasks") as? [Task]
+         else { return nil }
+        
         self.init(id: id, name: name, tasks: tasks)
     }
     
@@ -101,23 +101,24 @@ class DataManager
     }
     
     func restoreData() {
-        if let decoded  = UserDefaults.standard.object(forKey: "projects") as? Data {
-            projects = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Project]
+        if let decoded  = UserDefaults.standard.object(forKey: "projects") as? Data,
+            let projects = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? [Project?] {
+            self.projects = projects.compactMap { $0 }
         }
     }
 }
 
 extension DataManager
 {
-    func getProject(projectId: Int) -> Project? {
+    private func getProject(projectId: String) -> Project? {
         return projects.first(where: { $0.id == projectId })
     }
     
-    func getProjects() -> [Project] {
+    func getProjects(completion: ([Project])->()) {
         if projects.isEmpty {
             projects = initialProjects
         }
-        return projects
+        completion(projects)
     }
     
     func postProject(project: Project) {
@@ -132,11 +133,12 @@ extension DataManager
 
 extension DataManager
 {
-    func getTasks(projectId: Int) -> [Task] {
-        return getProject(projectId: projectId)?.tasks ?? []
+    func getTasks(projectId: String, completion: ([Task])->()) {
+        let tasks = getProject(projectId: projectId)?.tasks ?? []
+        completion(tasks)
     }
     
-    func postTask(projectId: Int, task: Task) {
+    func postTask(projectId: String, task: Task) {
         let project = getProject(projectId: projectId)
         project?.tasks.append(task)
         saveData()

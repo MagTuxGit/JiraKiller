@@ -14,24 +14,32 @@ class TasksListVC: UIViewController
     
     var project: Project?
     
-    var tasksList: [Task] {
-        return project?.tasks ?? []
-    }
+    var tasksList: [Task] = []
     var currentTask: Int? = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Tasks"
+        self.title = project?.name ?? "Tasks"
 
         tableView.delegate = self
         tableView.dataSource = self
         
         TasksDataSource.shared.delegate = self
+        getData()
         
         setupNavigationBar()
     }
     
+    func getData() {
+        guard let projectId = project?.id else { return }
+        
+        TasksDataSource.shared.getTasks(projectId: projectId) { [weak self] tasks in
+            self?.tasksList = tasks
+            self?.tableView.reloadData()
+        }
+    }
+
     @objc private func addNewTask(_ sender: UIBarButtonItem) {
         currentTask = nil
         showTaskDetails(task: nil)
@@ -53,7 +61,7 @@ class TasksListVC: UIViewController
 extension TasksListVC: TasksDataSourceDelegate
 {
     func tasksListDidUpdate() {
-        self.tableView.reloadData()
+        getData()
     }
 }
 

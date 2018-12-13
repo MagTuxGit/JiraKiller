@@ -21,11 +21,11 @@ class TasksDataSource
     
     private let dataManager = DataManager.shared
     
-    func getTasks(projectId: Int) -> [Task] {
-        return dataManager.getTasks(projectId:projectId)
+    func getTasks(projectId: String, completion: ([Task])->()) {
+        dataManager.getTasks(projectId:projectId, completion: completion)
     }
     
-    func postTask(projectId: Int, task: Task) {
+    func postTask(projectId: String, task: Task) {
         dataManager.postTask(projectId: projectId, task: task)
         delegate?.tasksListDidUpdate()
         NotificationCenter.default.post(name: .ProjectsListDidUpdate, object: nil, userInfo: nil)

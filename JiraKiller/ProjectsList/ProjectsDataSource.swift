@@ -13,8 +13,8 @@ class ProjectsDataSource
     
     private let dataManager = DataManager.shared
     
-    func getProjects() -> [Project] {
-        return dataManager.getProjects()
+    func getProjects(completion: ([Project])->()) {
+        dataManager.getProjects(completion: completion)
     }
     
     func postProject(project: Project) {

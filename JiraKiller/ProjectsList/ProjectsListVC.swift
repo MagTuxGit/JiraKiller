@@ -12,9 +12,7 @@ class ProjectsListVC: UIViewController
 {
     @IBOutlet weak var tableView: UITableView!
     
-    private var projectsList: [Project] {
-        return ProjectsDataSource.shared.getProjects()
-    }
+    private var projectsList: [Project] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +24,8 @@ class ProjectsListVC: UIViewController
         
         setupNavigationBar()
         
+        getData()
+
         NotificationCenter.default.addObserver(self, selector: #selector(didUpdateProjectslist(_ :)), name: .ProjectsListDidUpdate, object: nil)
     }
     
@@ -34,8 +34,15 @@ class ProjectsListVC: UIViewController
         NotificationCenter.default.removeObserver(self)
     }
 
+    func getData() {
+        ProjectsDataSource.shared.getProjects() { [weak self] projects in
+            self?.projectsList = projects
+            self?.tableView.reloadData()
+        }
+    }
+    
     @objc func didUpdateProjectslist(_ notification: NSNotification) {
-        self.tableView.reloadData()
+        getData()
     }
 
     @objc private func addNewItem(_ sender: UIBarButtonItem) {
@@ -46,7 +53,7 @@ class ProjectsListVC: UIViewController
         let saveAction = UIAlertAction(title: "Save", style: .default, handler: { [weak self] _ in
             if let projectName = alertController.textFields?[0].text {
                 ProjectsDataSource.shared.postProject(project: Project(name: projectName))
-                self?.tableView.reloadData()
+                self?.getData()
             }
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
