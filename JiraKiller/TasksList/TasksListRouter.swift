@@ -15,7 +15,18 @@ extension TasksListVC
             return
         }
         detailsVC.name = task?.name ?? ""
-        detailsVC.delegate = self
+        detailsVC.nameDidChange = { [weak self] name in
+            guard let `self` = self else { return }
+            
+            if let currentTask = self.currentTask {
+                let task = self.tasksList[currentTask]
+                task.name = name
+                TasksDataSource.shared.putTask(task: task)
+            } else {
+                let task = Task(name: name)
+                TasksDataSource.shared.postTask(projectId: self.project!.id, task: task)
+            }
+        }
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }

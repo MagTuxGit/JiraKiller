@@ -8,15 +8,11 @@
 
 import UIKit
 
-protocol NameEditorDelegate: class {
-    func nameDidChange(name: String)
-}
-
 class TaskDetailsVC: UIViewController
 {
     @IBOutlet private weak var taskNameTextField: UITextField!
     
-    weak var delegate: NameEditorDelegate?
+    var nameDidChange: (String)->() = { _ in }
     var name: String = ""
     
     override func viewDidLoad() {
@@ -34,7 +30,7 @@ class TaskDetailsVC: UIViewController
     @objc private func onSave(_ button: UIBarButtonItem) {
         name = taskNameTextField.text ?? ""
         
-        delegate?.nameDidChange(name: name)
+        nameDidChange(name)
         
         self.navigationController?.popViewController(animated: true)
     }

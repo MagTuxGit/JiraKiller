@@ -14,10 +14,10 @@ class TasksListVC: UIViewController
     
     var project: Project?
     
-    private var tasksList: [Task] {
+    var tasksList: [Task] {
         return project?.tasks ?? []
     }
-    private var currentTask: Int? = 0
+    var currentTask: Int? = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,18 +79,5 @@ extension TasksListVC: UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentTask = indexPath.row
         showTaskDetails(task: tasksList[indexPath.row])
-    }
-}
-
-extension TasksListVC: NameEditorDelegate {
-    func nameDidChange(name: String) {
-        if let currentTask = currentTask {
-            let task = tasksList[currentTask]
-            task.name = name
-            TasksDataSource.shared.putTask(task: task)
-        } else {
-            let task = Task(name: name)
-            TasksDataSource.shared.postTask(projectId: project!.id, task: task)
-        }
     }
 }
