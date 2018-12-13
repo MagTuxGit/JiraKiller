@@ -6,7 +6,9 @@
 //  Copyright © 2018 Andrij Trubchanin. All rights reserved.
 //
 
-class Project
+import Foundation
+
+class Project: NSObject, NSCoding
 {
     static var maxId: Int = 0
     
@@ -14,19 +16,48 @@ class Project
     var name: String
     var tasks = [Task]()
     
-    init(name: String) {
-        self.id = Project.maxId
-        Project.maxId += 1
+    init(id: Int, name: String, tasks: [Task]) {
+        self.id = id
         self.name = name
+        self.tasks = tasks
+    }
+    
+    convenience init(name: String) {
+        self.init(id: Project.maxId, name: name, tasks: [])
+        Project.maxId += 1
+    }
+    
+    // NSCoding
+    required convenience init(coder aDecoder: NSCoder) {
+        let id = aDecoder.decodeInteger(forKey: "id")
+        let name = aDecoder.decodeObject(forKey: "name") as! String
+        let tasks = aDecoder.decodeObject(forKey: "tasks") as! [Task]
+        self.init(id: id, name: name, tasks: tasks)
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: "id")
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(tasks, forKey: "tasks")
     }
 }
 
-class Task
+class Task: NSObject, NSCoding
 {
     var name: String
     
     init(name: String) {
         self.name = name
+    }
+    
+    // NSCoding
+    required convenience init(coder aDecoder: NSCoder) {
+        let name = aDecoder.decodeObject(forKey: "name") as! String
+        self.init(name: name)
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: "name")
     }
 }
 
@@ -62,6 +93,18 @@ class DataManager
         
         return data
     }()
+    
+    func saveData() {
+        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: projects)
+        UserDefaults.standard.set(encodedData, forKey: "projects")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func restoreData() {
+        if let decoded  = UserDefaults.standard.object(forKey: "projects") as? Data {
+            projects = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Project]
+        }
+    }
 }
 
 extension DataManager
@@ -79,9 +122,11 @@ extension DataManager
     
     func postProject(project: Project) {
         projects.append(project)
+        saveData()
     }
     
     func putProject(project: Project) {
+        saveData()
     }
 }
 
@@ -94,8 +139,10 @@ extension DataManager
     func postTask(projectId: Int, task: Task) {
         let project = getProject(projectId: projectId)
         project?.tasks.append(task)
+        saveData()
     }
     
     func putTask(task: Task) {
+        saveData()
     }
 }
