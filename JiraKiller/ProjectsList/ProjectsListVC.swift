@@ -61,8 +61,10 @@ extension ProjectsListVC: UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = projectsList[indexPath.row].name
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "Cell")
+        let project = projectsList[indexPath.row]
+        cell.textLabel?.text = project.name
+        cell.detailTextLabel?.text = String(project.tasks.count)
         return cell
     }
 }
