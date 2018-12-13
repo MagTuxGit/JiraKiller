@@ -25,8 +25,19 @@ class ProjectsListVC: UIViewController
         tableView.dataSource = self
         
         setupNavigationBar()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateProjectslist(_ :)), name: .ProjectsListDidUpdate, object: nil)
     }
     
+    deinit {
+        //NotificationCenter.default.removeObserver(self, name: .ProjectsListDidUpdate, object: nil)
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func didUpdateProjectslist(_ notification: NSNotification) {
+        self.tableView.reloadData()
+    }
+
     @objc private func addNewItem(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Add New Project", message: "", preferredStyle: .alert)
         alertController.addTextField { (textField : UITextField!) -> Void in

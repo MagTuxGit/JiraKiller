@@ -6,6 +6,8 @@
 //  Copyright © 2018 Andrij Trubchanin. All rights reserved.
 //
 
+import Foundation
+
 protocol TasksDataSourceDelegate: class {
     func tasksListDidUpdate()
 }
@@ -26,6 +28,7 @@ class TasksDataSource
     func postTask(projectId: Int, task: Task) {
         dataManager.postTask(projectId: projectId, task: task)
         delegate?.tasksListDidUpdate()
+        NotificationCenter.default.post(name: .ProjectsListDidUpdate, object: nil, userInfo: nil)
     }
     
     func putTask(task: Task) {

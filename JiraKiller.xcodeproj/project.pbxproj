@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8701C74021C1D0220020ECF3 /* TasksListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8701C73F21C1D0220020ECF3 /* TasksListRouter.swift */; };
+		87580BBA21C27B0500A6F527 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87580BB921C27B0500A6F527 /* Notifications.swift */; };
 		879947D521C063DA00B74DCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879947D421C063DA00B74DCC /* AppDelegate.swift */; };
 		879947DA21C063DA00B74DCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 879947D821C063DA00B74DCC /* Main.storyboard */; };
 		879947DC21C063DE00B74DCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 879947DB21C063DE00B74DCC /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		8701C73F21C1D0220020ECF3 /* TasksListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListRouter.swift; sourceTree = "<group>"; };
+		87580BB921C27B0500A6F527 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		879947D121C063DA00B74DCC /* JiraKiller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiraKiller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		879947D421C063DA00B74DCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		879947D921C063DA00B74DCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				8799480421C0774700B74DCC /* DataManager.swift */,
+				87580BB921C27B0500A6F527 /* Notifications.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87580BBA21C27B0500A6F527 /* Notifications.swift in Sources */,
 				8799480D21C07B2800B74DCC /* TaskDetailsVC.swift in Sources */,
 				879947F321C06D4500B74DCC /* ProjectsDataSource.swift in Sources */,
 				8701C74021C1D0220020ECF3 /* TasksListRouter.swift in Sources */,
